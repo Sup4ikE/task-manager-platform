@@ -16,13 +16,21 @@ It supports CRUD operations for tasks, user registration & login with JWT authen
 ## 🧰 Technologies Used
 - C# (.NET 9)  
 - ASP.NET Core (Web API + Blazor WebAssembly)  
-- Entity Framework Core  
+- Entity Framework Core
+- Xunit 
 - PostgreSQL  
 - JWT Authentication  
 - LINQ  
 - Git & GitHub  
 
 ---
+
+## 🧪 Testing
+Integration tests are included for backend API endpoints.  
+They cover:
+- TasksController (`/tasks`)  
+- UsersController (`/users`)  
+- Authentication via `TestAuthHandler`  
 
 ## 📌 Project Status
 ✅ Completed  
