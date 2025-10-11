@@ -5,6 +5,7 @@
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.AssemblyInfoInputs.cache
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.AssemblyInfo.cs
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.csproj.CoreCompileInputs.cache
+/Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.sourcelink.json
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.dll
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/refint/Shared.dll
 /Users/olegpona/Downloads/TaskManager/Shared/Shared/obj/Debug/net9.0/Shared.pdb

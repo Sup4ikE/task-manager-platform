@@ -10,6 +10,6 @@ public class Context(DbContextOptions<Context> options): DbContext(options)
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(@// your db);
+        // your db connection
     }
 }
