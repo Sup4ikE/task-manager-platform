@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "4V0WIJx52cc=",
-  "success": true,
+  "dgSpecHash": "5gH1cQeXlls=",
+  "success": false,
   "projectFilePath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj",
   "expectedPackageFiles": [
     "/Users/olegpona/.nuget/packages/blazored.localstorage/4.5.0/blazored.localstorage.4.5.0.nupkg.sha512",
@@ -32,14 +32,19 @@
     "/Users/olegpona/.nuget/packages/microsoft.entityframeworkcore.tools/9.0.9/microsoft.entityframeworkcore.tools.9.0.9.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.9/microsoft.extensions.caching.abstractions.9.0.9.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.extensions.caching.memory/9.0.9/microsoft.extensions.caching.memory.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.9/microsoft.extensions.configuration.abstractions.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.9/microsoft.extensions.dependencyinjection.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.9/microsoft.extensions.dependencyinjection.abstractions.9.0.9.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.configuration/9.0.11/microsoft.extensions.configuration.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.11/microsoft.extensions.configuration.abstractions.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.configuration.binder/9.0.11/microsoft.extensions.configuration.binder.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.11/microsoft.extensions.dependencyinjection.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.11/microsoft.extensions.dependencyinjection.abstractions.9.0.11.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.extensions.dependencymodel/9.0.9/microsoft.extensions.dependencymodel.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging/9.0.9/microsoft.extensions.logging.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.9/microsoft.extensions.logging.abstractions.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.options/9.0.9/microsoft.extensions.options.9.0.9.nupkg.sha512",
-    "/Users/olegpona/.nuget/packages/microsoft.extensions.primitives/9.0.9/microsoft.extensions.primitives.9.0.9.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging/9.0.11/microsoft.extensions.logging.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.11/microsoft.extensions.logging.abstractions.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging.configuration/9.0.11/microsoft.extensions.logging.configuration.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.logging.console/9.0.11/microsoft.extensions.logging.console.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.options/9.0.11/microsoft.extensions.options.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.options.configurationextensions/9.0.11/microsoft.extensions.options.configurationextensions.9.0.11.nupkg.sha512",
+    "/Users/olegpona/.nuget/packages/microsoft.extensions.primitives/9.0.11/microsoft.extensions.primitives.9.0.11.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.identity.abstractions/9.3.0/microsoft.identity.abstractions.9.3.0.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.identitymodel.abstractions/8.13.1/microsoft.identitymodel.abstractions.8.13.1.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.13.1/microsoft.identitymodel.jsonwebtokens.8.13.1.nupkg.sha512",
@@ -72,5 +77,17 @@
     "/Users/olegpona/.nuget/packages/system.text.json/9.0.9/system.text.json.9.0.9.nupkg.sha512",
     "/Users/olegpona/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.11 to 9.0.9. Reference the package directly from the project to select a different version. \n Api -> Infrastructure -> Microsoft.EntityFrameworkCore (>= 9.0.11) \n Api -> Microsoft.EntityFrameworkCore (>= 9.0.9)",
+      "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj",
+      "filePath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj",
+      "libraryId": "Microsoft.EntityFrameworkCore",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

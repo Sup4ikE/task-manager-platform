@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using TaskManager_API.Controllers;
+using TaskManager_API.Core.Application.Interfaces;
 using TaskManager_API.Data;
-using TaskManager_API.Services;
+using TaskManager_API.Core.Application.Services;
 
 namespace TaskManager_API;
 
