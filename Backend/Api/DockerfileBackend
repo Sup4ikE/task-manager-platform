@@ -1,0 +1,18 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+COPY TaskManager.sln .
+COPY Backend/TaskManager_API.csproj ./Backend/
+COPY Frontend/TaskManager_Client.csproj ./Frontend/
+COPY Shared/Shared/Shared.csproj ./Shared/
+
+RUN dotnet restore Backend/TaskManager_API.csproj
+
+COPY . .
+WORKDIR /src/Backend
+RUN dotnet publish -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "TaskManager_API.dll"]

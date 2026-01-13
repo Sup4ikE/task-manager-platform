@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: Docker/DockerfileBackend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskManager;Username=postgres;Password=1846Awlq
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: Docker/DockerfileFrontend
+    ports:
+      - "8081:8081"
+    depends_on:
+      - backend
+    environment:
+      - ASPNETCORE_URLS=http://+:8081
+      - BackendUrl=http://backend:8080
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1846Awlq
+      POSTGRES_DB: TaskManager
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

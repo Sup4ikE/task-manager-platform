@@ -66,7 +66,7 @@ public class UsersTesting: IClassFixture<WebApplicationFactory<Program>>
         
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        // result.Should().NotBeNull();
+        result.Should().NotBeNull();
         //result.Should().HaveCount(1); 
         // result[0].Username.Should().Be("TestUser");
         // result[0].Role.Should().Be("Admin");

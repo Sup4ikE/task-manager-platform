@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Backend\TaskManager_API\TaskManager_API.csproj" />
+        <ProjectReference Include="..\Backend\Api\Api.csproj" />
         <ProjectReference Include="..\Shared\Shared\Shared.csproj" />
         <ProjectReference Include="..\Frontend\TaskManager_Client\TaskManager_Client.csproj" />
     </ItemGroup>

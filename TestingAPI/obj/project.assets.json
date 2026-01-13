@@ -1644,21 +1644,13 @@
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
-      "Shared/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "compile": {
-          "bin/placeholder/Shared.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Shared.dll": {}
-        }
-      },
-      "TaskManager_API/1.0.0": {
+      "Api/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Blazored.LocalStorage": "4.5.0",
+          "Core": "1.0.0",
+          "Infrastructure": "1.0.0",
           "JWTSecurityHandler": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "9.0.9",
           "Microsoft.EntityFrameworkCore": "9.0.9",
@@ -1671,14 +1663,47 @@
           "Swashbuckle.AspNetCore.SwaggerUI": "9.0.3"
         },
         "compile": {
-          "bin/placeholder/TaskManager_API.dll": {}
+          "bin/placeholder/Api.dll": {}
         },
         "runtime": {
-          "bin/placeholder/TaskManager_API.dll": {}
+          "bin/placeholder/Api.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        }
+      },
+      "Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infrastructure.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.dll": {}
+        }
       },
       "TaskManager_Client/1.0.0": {
         "type": "project",
@@ -3843,15 +3868,25 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "Api/1.0.0": {
+      "type": "project",
+      "path": "../Backend/Api/Api.csproj",
+      "msbuildProject": "../Backend/Api/Api.csproj"
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Backend/Core/Core.csproj",
+      "msbuildProject": "../Backend/Core/Core.csproj"
+    },
+    "Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Backend/Infrastructure/Infrastructure.csproj",
+      "msbuildProject": "../Backend/Infrastructure/Infrastructure.csproj"
+    },
     "Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/Shared/Shared.csproj",
       "msbuildProject": "../Shared/Shared/Shared.csproj"
-    },
-    "TaskManager_API/1.0.0": {
-      "type": "project",
-      "path": "../Backend/TaskManager_API/TaskManager_API.csproj",
-      "msbuildProject": "../Backend/TaskManager_API/TaskManager_API.csproj"
     },
     "TaskManager_Client/1.0.0": {
       "type": "project",
@@ -3861,12 +3896,12 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Api >= 1.0.0",
       "FluentAssertions >= 8.7.1",
       "Microsoft.AspNetCore.Mvc.Testing >= 9.0.9",
       "Microsoft.EntityFrameworkCore.InMemory >= 9.0.9",
       "Microsoft.NET.Test.Sdk >= 17.12.0",
       "Shared >= 1.0.0",
-      "TaskManager_API >= 1.0.0",
       "TaskManager_Client >= 1.0.0",
       "coverlet.collector >= 6.0.2",
       "xunit >= 2.9.2",
@@ -3898,8 +3933,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj": {
-              "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj"
+            "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj": {
+              "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj"
             },
             "/Users/olegpona/Downloads/TaskManager/Frontend/TaskManager_Client/TaskManager_Client.csproj": {
               "projectPath": "/Users/olegpona/Downloads/TaskManager/Frontend/TaskManager_Client/TaskManager_Client.csproj"

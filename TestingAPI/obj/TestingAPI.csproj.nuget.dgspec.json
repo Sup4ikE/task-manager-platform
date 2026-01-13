@@ -4,14 +4,14 @@
     "/Users/olegpona/Downloads/TaskManager/TestingAPI/TestingAPI.csproj": {}
   },
   "projects": {
-    "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj": {
+    "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj",
-        "projectName": "TaskManager_API",
-        "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj",
+        "projectUniqueName": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj",
+        "projectName": "Api",
+        "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj",
         "packagesPath": "/Users/olegpona/.nuget/packages/",
-        "outputPath": "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/obj/",
+        "outputPath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/olegpona/.nuget/NuGet/NuGet.Config"
@@ -26,6 +26,12 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj": {
+                "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj"
+              },
+              "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/Infrastructure.csproj"
+              },
               "/Users/olegpona/Downloads/TaskManager/Shared/Shared/Shared.csproj": {
                 "projectPath": "/Users/olegpona/Downloads/TaskManager/Shared/Shared/Shared.csproj"
               }
@@ -110,6 +116,128 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj",
+        "projectName": "Core",
+        "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj",
+        "packagesPath": "/Users/olegpona/.nuget/packages/",
+        "outputPath": "/Users/olegpona/Downloads/TaskManager/Backend/Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/olegpona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/Infrastructure.csproj",
+        "packagesPath": "/Users/olegpona/.nuget/packages/",
+        "outputPath": "/Users/olegpona/Downloads/TaskManager/Backend/Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/olegpona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj": {
+                "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Core/Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -279,8 +407,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj": {
-                "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/TaskManager_API/TaskManager_API.csproj"
+              "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj": {
+                "projectPath": "/Users/olegpona/Downloads/TaskManager/Backend/Api/Api.csproj"
               },
               "/Users/olegpona/Downloads/TaskManager/Frontend/TaskManager_Client/TaskManager_Client.csproj": {
                 "projectPath": "/Users/olegpona/Downloads/TaskManager/Frontend/TaskManager_Client/TaskManager_Client.csproj"
