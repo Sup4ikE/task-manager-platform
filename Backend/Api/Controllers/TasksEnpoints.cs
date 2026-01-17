@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
-using Shared.DTO;
-using Shared.Models;
+using TaskManager_API.Contracts.DTOs;
+using TaskManager_API.Core.Domain; // видалити
 using TaskManager_API.Data;
 
 namespace TaskManager_API.Controllers;
@@ -12,7 +12,7 @@ public static class TasksEnpoints
     {
         var group = app.MapGroup("tasks").RequireAuthorization();
 
-        group.MapGet("/", async (Context db, HttpContext http) =>
+        group.MapGet("/", async (TaskManagerContext db, HttpContext http) =>
         {
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null) return Results.Unauthorized();
@@ -34,7 +34,7 @@ public static class TasksEnpoints
             return Results.Ok(tasks);
         });
 
-        group.MapGet("/{id}", async (Context db, HttpContext http, int id) =>
+        group.MapGet("/{id}", async (TaskManagerContext db, HttpContext http, int id) =>
         {
             var userId = int.Parse(http.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -55,7 +55,7 @@ public static class TasksEnpoints
 
 
         //  "2025-08-14T00:00:00Z"
-        group.MapPost("/", async (Context db, HttpContext http, TaskDTO newTaskDTO) =>
+        group.MapPost("/", async (TaskManagerContext db, HttpContext http, TaskDTO newTaskDTO) =>
         {
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
@@ -81,7 +81,7 @@ public static class TasksEnpoints
             return Results.Created($"/tasks/{newTask.Id}", newTask);
         });
 
-        group.MapPut("/{id}", async (Context db, HttpContext http, int id, TaskDTO updateTaskDTO) =>
+        group.MapPut("/{id}", async (TaskManagerContext db, HttpContext http, int id, TaskDTO updateTaskDTO) =>
         {
             var userId = int.Parse(http.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -97,7 +97,7 @@ public static class TasksEnpoints
             return Results.NoContent();
         });
 
-        group.MapDelete("/{id}", async (Context db, HttpContext http, int id) =>
+        group.MapDelete("/{id}", async (TaskManagerContext db, HttpContext http, int id) =>
         {
             var userId = int.Parse(http.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

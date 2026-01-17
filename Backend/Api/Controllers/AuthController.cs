@@ -3,9 +3,10 @@ using System.Xml.Schema;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
-using Shared.DTO;
-using Shared.Models;
-using TaskManager_API.Services;
+using TaskManager_API.Contracts.DTOs;
+using TaskManager_API.Core.Application.Interfaces;
+using TaskManager_API.Core.Application.Services;
+using TaskManager_API.Core.Domain;
 
 namespace TaskManager_API.Controllers;
 

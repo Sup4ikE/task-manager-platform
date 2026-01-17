@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
-using Shared.DTO;
-using Shared.Models;
+using TaskManager_API.Contracts.DTOs;
 using TaskManager_Client.Services;
 
 namespace TaskManager_Client.Clients;

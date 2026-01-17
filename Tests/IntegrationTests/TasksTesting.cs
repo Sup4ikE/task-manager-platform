@@ -22,10 +22,10 @@ public class TasksTesting : IClassFixture<WebApplicationFactory<Program>>
         {
             builder.ConfigureServices(services =>
             {
-                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<Context>)); 
+                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TaskManagerContext>)); 
                 if (descriptor != null) services.Remove(descriptor);
                 
-                services.AddDbContext<Context>(options =>
+                services.AddDbContext<TaskManagerContext>(options =>
                 {
                     options.UseInMemoryDatabase("TestDb").UseInternalServiceProvider( new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider());
                 }); 
@@ -46,7 +46,7 @@ public class TasksTesting : IClassFixture<WebApplicationFactory<Program>>
         // Arrange
         using (var scope = _factory.Services.CreateScope())
         {
-            var db = scope.ServiceProvider.GetRequiredService<Context>();
+            var db = scope.ServiceProvider.GetRequiredService<TaskManagerContext>();
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
 

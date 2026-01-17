@@ -11,7 +11,7 @@ using TaskManager_API.Data;
 
 namespace TaskManager_API.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(TaskManagerContext))]
     [Migration("20250812181425_Makle")]
     partial class Makle
     {

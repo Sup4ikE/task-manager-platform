@@ -1,11 +1,10 @@
 @page "/users"
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
-@using Shared.DTO
+@using TaskManager_API.Contracts.DTOs
 @using TaskManager_Client.Clients
 @using TaskManager_Client.Services
 @using Microsoft.AspNetCore.Components.Forms
-@using Shared.Models
 @inject AuthService AuthService
 @inject AuthenticationStateProvider AuthProvider
 @inject UsersClient UsersClient

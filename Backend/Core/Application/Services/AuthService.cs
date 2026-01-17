@@ -11,7 +11,7 @@ using TaskManager_API.Core.Application.Interfaces;
 
 namespace TaskManager_API.Core.Application.Services;
 
-public class AuthService(Context context, IConfiguration configuration): IAuthService
+public class AuthService(TaskManagerContext context, IConfiguration configuration): IAuthService
 {
     // Registation
     public async Task<User?> RegisterAsync(UserDTO request)

@@ -1,4 +1,6 @@
 using System.Text;
+using Core.Application.Services;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,8 +23,12 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddControllers();
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        // builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+        // builder.Services.AddScoped<ITaskService, TaskService>();
         
-        builder.Services.AddDbContext<Context>(options =>
+        builder.Services.AddDbContext<TaskManagerContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("ManagerDbCS")));
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -49,7 +55,7 @@ public class Program
             var services = scope.ServiceProvider;
             try
             {
-                var context = services.GetRequiredService<Context>();
+                var context = services.GetRequiredService<TaskManagerContext>();
                 await context.Database.MigrateAsync();
             }
             catch (Exception ex)
@@ -63,12 +69,12 @@ public class Program
             app.MapOpenApi();
             app.MapScalarApiReference();
         }
-
-        app.MapUsersEndpoints();
-        app.MapTasksEnpoints();
+        
         app.UseAuthentication();
         app.UseAuthorization();
+
         app.MapControllers();
+        app.MapTasksEnpoints();
         app.Run();
     }
 }
