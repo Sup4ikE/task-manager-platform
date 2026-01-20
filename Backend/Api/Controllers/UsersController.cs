@@ -8,7 +8,7 @@ namespace TaskManager_API.Controllers;
 [Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController : ControllerBase
+public class UsersController: ControllerBase
 {
     private readonly IUserService _userService;
 

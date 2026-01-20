@@ -25,8 +25,8 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserService, UserService>();
-        // builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-        // builder.Services.AddScoped<ITaskService, TaskService>();
+        builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+        builder.Services.AddScoped<ITaskService, TaskService>();
         
         builder.Services.AddDbContext<TaskManagerContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("ManagerDbCS")));
@@ -48,7 +48,6 @@ public class Program
             });
 
         var app = builder.Build();
-        
         
         using (var scope = app.Services.CreateScope())
         {
@@ -74,7 +73,6 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-        app.MapTasksEnpoints();
         app.Run();
     }
 }
