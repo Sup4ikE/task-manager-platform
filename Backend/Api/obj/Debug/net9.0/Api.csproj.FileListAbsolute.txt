@@ -34,7 +34,6 @@
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
-/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Identity.Abstractions.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
@@ -123,8 +122,6 @@
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Shared.dll
-/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Shared.pdb
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/Api.csproj.AssemblyReference.cache
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/Api.GeneratedMSBuildEditorConfig.editorconfig
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/Api.AssemblyInfoInputs.cache
@@ -150,3 +147,14 @@
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/Api.pdb
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/Api.genruntimeconfig.cache
 /Users/olegpona/Downloads/TaskManager/Backend/Api/obj/Debug/net9.0/ref/Api.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Binder.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Configuration.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Console.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Contracts.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Core.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Infrastructure.dll
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Contracts.pdb
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Core.pdb
+/Users/olegpona/Downloads/TaskManager/Backend/Api/bin/Debug/net9.0/Infrastructure.pdb

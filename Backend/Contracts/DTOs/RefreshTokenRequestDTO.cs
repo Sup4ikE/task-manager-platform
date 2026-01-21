@@ -2,6 +2,6 @@ namespace TaskManager_API.Contracts.DTOs;
 
 public class RefreshTokenRequestDTO
 {
-    public Guid UserId { get; set; } = Guid.NewGuid();
+    public int UserId { get; set; }
     public required string RefreshToken { get; set; }
 }

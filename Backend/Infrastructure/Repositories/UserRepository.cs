@@ -29,6 +29,19 @@ public class UserRepository: IUserRepository
         
         return user;
     }
+    
+    public async Task<User?> GetByUsernameAsync(string username)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        return user;
+    }
+
+    public async Task<User> AddAsync(User user)
+    {
+        await _context.Users.AddAsync(user);
+        
+        return user;
+    }
 
     public async Task<bool> DeleteByIdAsync(int id)
     {
