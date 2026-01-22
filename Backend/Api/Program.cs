@@ -34,7 +34,10 @@ public class Program
         
         // DB
         builder.Services.AddDbContext<TaskManagerContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("ManagerDbCS")));
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("ManagerDbCS"),
+                x => x.MigrationsAssembly("Infrastructure")
+            ));
 
         // JWT
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -94,21 +97,10 @@ public class Program
             app.UseSwaggerUI();
         }
         
-        using (var scope = app.Services.CreateScope())
+        if (!app.Environment.IsDevelopment())
         {
-            var services = scope.ServiceProvider;
-            try
-            {
-                var context = services.GetRequiredService<TaskManagerContext>();
-                await context.Database.MigrateAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error has occured while migrating the database: {ex.Message}");
-            }
+            app.UseHttpsRedirection();
         }
-        
-        app.UseHttpsRedirection();
 
         app.UseAuthentication();
         app.UseAuthorization();
