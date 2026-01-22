@@ -1,4 +1,0 @@
-[19:23:15.113] Program.cs executed. Environment: ''
-[19:25:35.106] Program.cs executed. Environment: ''
-[19:36:21.505] Program.cs executed. Environment: ''
-[19:37:18.348] Program.cs executed. Environment: ''
