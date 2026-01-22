@@ -1,5 +1,4 @@
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using Microsoft.AspNetCore.Components;
 using TaskManager_API.Contracts.DTOs;
 using Microsoft.AspNetCore.Components.Authorization;

@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "ManifestType": "Build",
+  "Endpoints": [
+    {
+      "Route": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js",
+      "AssetFile": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23511"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JzaosJ3uYZPoEeUF7Nw9s59Fn1ErvfMZ9KlAZqrLDJc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 06 Dec 2023 09:17:38 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JzaosJ3uYZPoEeUF7Nw9s59Fn1ErvfMZ9KlAZqrLDJc="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js",
+      "AssetFile": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000152951973"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6537"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dunBKnh0OrqwoNd5TrHf7sKohKTiOO8LU9nfzYejiSc=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JzaosJ3uYZPoEeUF7Nw9s59Fn1ErvfMZ9KlAZqrLDJc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 06 Dec 2023 09:17:38 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JzaosJ3uYZPoEeUF7Nw9s59Fn1ErvfMZ9KlAZqrLDJc="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js.gz",
+      "AssetFile": "_content/Solutaris.InfoWARE.ProtectedBrowserStorage/config.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6537"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dunBKnh0OrqwoNd5TrHf7sKohKTiOO8LU9nfzYejiSc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 06 Dec 2023 09:17:38 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dunBKnh0OrqwoNd5TrHf7sKohKTiOO8LU9nfzYejiSc="
+        }
+      ]
+    }
+  ]
+}
