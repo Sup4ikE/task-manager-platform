@@ -29,8 +29,6 @@ Full-stack task management web application built with **ASP.NET Core** and **Bla
 - Swagger / OpenAPI
 
 ## 📁 Project Structure
-
-📦 Project structure:
 Api/ — ASP.NET Core Web API  
 Core/ — Domain & application logic  
 Infrastructure/ — Database access, repositories, authentication  
