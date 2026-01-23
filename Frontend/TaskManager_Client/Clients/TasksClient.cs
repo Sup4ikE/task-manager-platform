@@ -1,8 +1,6 @@
 using System.Net.Http.Headers;
 using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Identity;
-using Shared.DTO;
-using Shared.Models;
+using TaskManager_API.Contracts.DTOs;
 
 namespace TaskManager_Client.Clients;
 

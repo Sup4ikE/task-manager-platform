@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/TaskManager_API.props" />
-</Project>

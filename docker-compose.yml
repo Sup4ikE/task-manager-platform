@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16
+    container_name: TaskManager_Db
+    environment:
+      POSTGRES_DB: TaskManager
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1846Awlq
+    ports:
+      - "5432:5432"
+    volumes:
+      - taskmanager_pg:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Backend/Api/Dockerfile
+    container_name: taskmanager_api
+    depends_on:
+      - db
+    ports:
+      - "5204:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__ManagerDbCS: "Host=localhost;Port=5432;Database=TaskManager;Username=postgres;Password=1846Awlq"
+      AppSettings__Issuer: "TaskManager"
+      AppSettings__Audience: "TaskManagerClient"
+      AppSettings__Token: "CHANGE_ME_TO_LONG_RANDOM_SECRET_KEY_32+"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Frontend/TaskManager_Client/Dockerfile
+    container_name: taskmanager_frontend
+    depends_on:
+      - api
+    ports:
+      - "5102:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      backendApiUrl: "http://api:8080/"
+
+volumes:
+  taskmanager_pg:
