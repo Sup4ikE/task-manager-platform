@@ -1,7 +1,0 @@
-{
-  "Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/olegpona\/Downloads\/TaskManager\/Backend\/Api",
-  "Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/olegpona\/Downloads\/TaskManager\/Backend\/Contracts",
-  "Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/olegpona\/Downloads\/TaskManager\/Backend\/Core",
-  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/olegpona\/Downloads\/TaskManager\/Backend\/Infrastructure",
-  "TaskManager_Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/olegpona\/Downloads\/TaskManager\/Frontend\/TaskManager_Client"
-}
