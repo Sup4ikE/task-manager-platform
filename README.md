@@ -1,38 +1,43 @@
-Task Manager WebSite is a web application for managing tasks, built with ASP.NET Core.  
-It supports CRUD operations for tasks, user registration & login with JWT authentication, and data persistence with PostgreSQL via Entity Framework Core.
+# Task Manager
 
-## ⚙️ Features
-- 🔐 User authentication with registration & login (JWT-based)  
-- ➕ Create, edit, delete, and view tasks  
-- 👥 User management  
-- 📂 Clean architecture with Client / Server / Shared projects  
-- 🔎 Task filtering and browsing  
-- 🗄️ Data persistence with EF Core & PostgreSQL  
-- 🎨 Frontend built with Blazor WebAssembly  
-- 🌐 Backend API with ASP.NET Core Web API  
+Full-stack task management web application built with **ASP.NET Core** and **Blazor**, following **Clean Architecture** principles.
 
----
+## 🚀 Features
+- User registration and login (JWT authentication)
+- Task management (create, update, delete)
+- Secure REST API
+- Separation of concerns using Clean Architecture
+- PostgreSQL database with Entity Framework Core
 
-## 🧰 Technologies Used
-- C# (.NET 9)  
-- ASP.NET Core (Web API + Blazor WebAssembly)  
+## 🧱 Tech Stack
+
+### Backend
+- ASP.NET Core
+- Clean Architecture
 - Entity Framework Core
-- Xunit 
-- PostgreSQL  
-- JWT Authentication  
-- LINQ  
-- Git & GitHub  
+- PostgreSQL
+- JWT Authentication
 
----
+### Frontend
+- Blazor
+- HTTP API integration
+- JWT-based authorization
 
-## 🧪 Testing
-Integration tests are included for backend API endpoints.  
-They cover:
-- TasksController (`/tasks`)  
-- UsersController (`/users`)  
-- Authentication via `TestAuthHandler`  
+### Other
+- Git
+- Docker (optional)
+- Swagger / OpenAPI
 
-## 📌 Project Status
-✅ Completed  
+## 📁 Project Structure
 
-This project was built as a personal learning project and serves as a portfolio piece demonstrating a fullstack ASP.NET Core application with real-world architecture and database integration.
+Backend/
+Api/ # ASP.NET Core Web API
+Core/ # Domain + Application logic
+Infrastructure/ # EF Core, repositories, auth
+Frontend/
+TaskManager_Client/ # Blazor frontend
+Tests/ # Unit / integration tests
+
+📌 Author
+
+Created by Oleg Pona Junior Backend Developer (.NET)
