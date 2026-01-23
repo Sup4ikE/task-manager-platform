@@ -1,4 +1,3 @@
-using Xunit; 
 using FluentAssertions; 
 using Microsoft.AspNetCore.Mvc.Testing; 
 using Microsoft.Extensions.DependencyInjection; 
@@ -61,14 +60,14 @@ public class UsersTesting: IClassFixture<WebApplicationFactory<Program>>
         var client = _factory.CreateClient(); 
         
         // Act
-        var response = await client.GetAsync("/users");
+        var response = await client.GetAsync("/api/users");
         var result = await response.Content.ReadFromJsonAsync<List<UserResponseDTO>>();
         
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         result.Should().NotBeNull();
-        //result.Should().HaveCount(1); 
-        // result[0].Username.Should().Be("TestUser");
-        // result[0].Role.Should().Be("Admin");
+        result.Should().HaveCount(1); 
+        result[0].Username.Should().Be("TestUser");
+        result[0].Role.Should().Be("Admin");
     } 
 }
