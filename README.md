@@ -1,107 +1,107 @@
-# Task Manager API
+# ⚡ Task Manager Platform
 
-Production-oriented task management system built with **ASP.NET Core**, following **Clean Architecture** principles.
-The project focuses on backend architecture, authentication, and clean separation of responsibilities.
-
-> This project was created to demonstrate real-world backend development practices for a Junior .NET Developer role.
+Modern task management platform built with ASP.NET Core using Clean Architecture, focused on scalable backend design and secure authentication.
 
 ---
 
-## 🚀 Key Features
+## 🚀 Tech Stack
 
-### 🔐 Authentication & Authorization
-- JWT-based authentication (Access + Refresh tokens)
-- Secure login / logout flow
-- Role-based authorization (`User`, `Admin`)
-- Token validation via middleware
+### 🧠 Backend
 
-### 📋 Task Management
-- Full CRUD operations for tasks
-- User-scoped data access
-- Validation at application layer
-- RESTful API design with proper HTTP status codes
+* ASP.NET Core Web API
+* Entity Framework Core
+* PostgreSQL
+* JWT Authentication
+* Clean Architecture
 
-### 🧱 Architecture
-- Clean Architecture (Domain → Application → Infrastructure → API)
-- Business logic isolated from infrastructure concerns
-- Dependency Injection across all layers
-- Easily testable services
+### 🎨 Frontend
+
+* Blazor
+* REST API integration
+
+### ⚙️ Tooling
+
+* Swagger / OpenAPI
+* Git
+* Docker (optional)
 
 ---
 
-## 🏗️ Architecture Overview
+## ✨ Features
 
-The project follows **Clean Architecture** to ensure:
-- High testability
-- Loose coupling
-- Clear separation of concerns
+* 🔐 JWT Authentication (Access + Refresh tokens)
+* 🛡️ Role-based access control (User / Admin)
+* 📋 Full CRUD for task management
+* 👤 User-scoped data isolation
+* ✅ Validation at application layer
+* 🔁 Middleware-based token validation
+* 📘 Swagger UI for API exploration
+* 🌐 RESTful API design
 
-### Layers:
-- **Core** — Domain models, business rules, interfaces
-- **Infrastructure** — EF Core, database access, authentication implementation
-- **Api** — ASP.NET Core Web API, controllers, middleware
-- **Frontend** — Blazor client consuming the REST API
-- **Tests** — Unit and integration tests for business logic
+---
+
+## 🏗️ Architecture
+
+```
+Domain → Application → Infrastructure → API
+```
+
+* Clear separation of concerns
+* Business logic isolated from infrastructure
+* Dependency Injection across all layers
+* Designed for scalability and testability
+
+---
+
+## 📂 Project Structure
+
+```
+task-manager-platform/
+│
+├── TaskManager.Api
+├── TaskManager.Core
+├── TaskManager.Infrastructure
+├── TaskManager.Tests
+├── frontend (Blazor)
+```
 
 ---
 
 ## 🧪 Testing
-- Unit tests for application services
-- Business logic tested independently from controllers
-- Authentication and validation scenarios covered
+
+* Unit tests for application services
+* Business logic tested independently
+* Authentication and validation covered
 
 ---
 
 ## 🗄️ Database
-- PostgreSQL
-- Entity Framework Core
-- Code-first migrations
-- Async database operations
 
----
-
-## 🧰 Tech Stack
-
-### Backend
-- ASP.NET Core
-- Entity Framework Core
-- PostgreSQL
-- JWT Authentication
-- Clean Architecture
-
-### Frontend
-- Blazor
-- REST API integration
-- JWT-based authorization
-
-### Tooling
-- Git
-- Swagger / OpenAPI
-- Docker (optional)
+* PostgreSQL
+* Entity Framework Core (Code First)
+* Async queries & migrations
 
 ---
 
 ## ▶️ Running the Project
 
-1. Clone the repository
-2. Configure connection string and JWT settings
-3. Run database migrations
-4. Start the API and Blazor client
+1. Clone repository
+2. Configure `appsettings.json` (DB + JWT)
+3. Run migrations
+4. Start API and frontend
 
-Swagger UI is available for API testing.
-
----
-
-## 📌 Purpose of the Project
-
-This project was built to:
-- Practice real-world backend architecture
-- Implement secure authentication
-- Demonstrate readiness for a **Junior .NET Backend Developer** position
+Swagger available for API testing.
 
 ---
 
-## 👤 Author
+## 👨‍💻 Author
 
-**Oleg Pona**  
-Junior Backend Developer (.NET)  
+**Oleg Pona**
+
+---
+
+## ⭐ About
+
+This project demonstrates real-world backend development practices, including clean architecture, authentication, and scalable API design.
+
+
