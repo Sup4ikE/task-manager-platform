@@ -1,12 +1,12 @@
+using TaskManager_API.Core.Application.Models;
 using TaskManager_API.Core.Domain;
-using TaskManager_API.Contracts.DTOs;
 
 namespace TaskManager_API.Core.Application.Interfaces;
 
 public interface IAuthService
 {
-    Task<User?> RegisterAsync(UserDTO request);
-    Task<TokenResponseDTO?> LoginAsync(UserDTO request);
+    Task<User?> RegisterAsync(string username, string password);
+    Task<AuthResult?> LoginAsync(string username, string password);
     Task<bool> LogoutAsync(int userId);
-    Task<TokenResponseDTO?> RefreshTokensAsync(RefreshTokenRequestDTO request);
+    Task<AuthResult?> RefreshTokensAsync(int userId, string refreshToken);
 }

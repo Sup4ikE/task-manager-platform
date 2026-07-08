@@ -7,7 +7,7 @@
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6f5590d3_002D11bf_002D44f2_002D9804_002D8f1195ae829e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthServiceTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6f5590d3_002D11bf_002D44f2_002D9804_002D8f1195ae829e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuthServiceTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::TasksTesting&lt;/TestId&gt;
@@ -20,9 +20,10 @@
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8e3c963_002D6569_002D4dac_002Dada8_002D3edcbb45d68e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuthServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8e3c963_002D6569_002D4dac_002Dada8_002D3edcbb45d68e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::TasksTesting&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::UsersTesting&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

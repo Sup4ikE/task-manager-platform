@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager_API.Contracts.DTOs;
 using TaskManager_API.Core.Application.Interfaces;
+using TaskManager_API.Core.Domain;
 
 namespace TaskManager_API.Controllers;
 
@@ -35,7 +36,16 @@ public class TasksController: ControllerBase
         
         var tasks = await _taskService.GetAllAsync(userId);
         
-        return Ok(tasks);
+        var dtos = tasks.Select(x => new TaskDTO() 
+        {  
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            IsCompleted = x.IsCompleted,
+            Created = x.Created 
+        }).ToList();
+        
+        return Ok(dtos);
     }
 
     [HttpGet("{id}")]
@@ -44,8 +54,19 @@ public class TasksController: ControllerBase
         if (!TryGetUserId(out var userId)) return Unauthorized();
         
         var task = await _taskService.GetByIdAsync(userId, id);
+
+        if (task == null) return NotFound();
         
-        return task == null ? NotFound() : Ok(task);
+        var taskDto = new TaskDTO()
+        {
+            Id = task.Id,
+            Title = task.Title,
+            Description = task.Description,
+            IsCompleted = task.IsCompleted,
+            Created = task.Created
+        };
+        
+        return Ok(taskDto);
     }
 
     [HttpPost]
@@ -54,9 +75,25 @@ public class TasksController: ControllerBase
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();;
 
-        var newTask = await _taskService.AddAsync(taskItem, userId);
+        var task = new TaskItem()
+        {
+            Title = taskItem.Title,
+            Description = taskItem.Description,
+            IsCompleted = taskItem.IsCompleted
+        };
         
-        return CreatedAtAction(nameof(GetByIdAsync), new {id = newTask.Id}, newTask);
+        var newTask = await _taskService.AddAsync(task, userId);
+
+        var newTaskDto = new TaskDTO()
+        {
+            Id = newTask.Id,
+            Title = newTask.Title,
+            Description = newTask.Description,
+            IsCompleted = newTask.IsCompleted,
+            Created = newTask.Created
+        };
+        
+        return CreatedAtAction(nameof(GetByIdAsync), new {id = newTaskDto.Id}, newTaskDto);
     }
 
     [HttpPut("{id}")]
@@ -64,7 +101,15 @@ public class TasksController: ControllerBase
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();
 
-        var isUpdated = await _taskService.UpdateAsync(userId, id, taskItem);
+        var task = new TaskItem()
+        {
+            Id = id,
+            Title = taskItem.Title,
+            Description = taskItem.Description,
+            IsCompleted = taskItem.IsCompleted
+        };
+        
+        var isUpdated = await _taskService.UpdateAsync(userId, id, task);
 
         return isUpdated ? NoContent() : NotFound();
     }

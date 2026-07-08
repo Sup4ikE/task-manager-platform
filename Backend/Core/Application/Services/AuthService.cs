@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Identity;
-using TaskManager_API.Core.Domain;
-using TaskManager_API.Contracts.DTOs;
 using TaskManager_API.Core.Application.Interfaces;
+using TaskManager_API.Core.Application.Models;
+using TaskManager_API.Core.Domain;
 
 namespace TaskManager_API.Core.Application.Services;
 
-public class AuthService: IAuthService
+public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
@@ -19,53 +19,46 @@ public class AuthService: IAuthService
         _jwtTokenGenerator = jwtTokenGenerator;
         _refreshTokenService = refreshTokenService;
     }
-    
-    private async Task<TokenResponseDTO> CreateTokenResponse(User user)
+
+    private async Task<AuthResult> CreateTokenResponse(User user)
     {
-        return new TokenResponseDTO
+        return new AuthResult
         {
             AccessToken = _jwtTokenGenerator.CreateToken(user),
             RefreshToken = await _refreshTokenService.GenerateAndSaveRefreshTokenAsync(user)
         };
     }
-    
-    
-    public async Task<User?> RegisterAsync(UserDTO request)
+
+    public async Task<User?> RegisterAsync(string username, string password)
     {
-        var userN = await _userRepository.GetByUsernameAsync(request.Username);
-        if (userN != null) return null;
+        var existing = await _userRepository.GetByUsernameAsync(username);
+        if (existing != null) return null;
 
         var user = new User
         {
-            Username = request.Username,
+            Username = username,
             Role = "User"
         };
 
-        user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
+        user.PasswordHash = _passwordHasher.HashPassword(user, password);
 
         await _userRepository.AddAsync(user);
         await _userRepository.SaveChangesAsync();
 
         return user;
     }
-    
-    public async Task<TokenResponseDTO?> LoginAsync(UserDTO request)
+
+    public async Task<AuthResult?> LoginAsync(string username, string password)
     {
-        var user = await _userRepository.GetByUsernameAsync(request.Username);
-        if (user == null)
-        {
-            return null;
-        }
-        
-        var verify = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-        if (verify == PasswordVerificationResult.Failed)
-        {
-            return null;
-        }
+        var user = await _userRepository.GetByUsernameAsync(username);
+        if (user == null) return null;
+
+        var verify = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+        if (verify == PasswordVerificationResult.Failed) return null;
 
         return await CreateTokenResponse(user);
     }
-    
+
     public async Task<bool> LogoutAsync(int userId)
     {
         var user = await _userRepository.GetByIdAsync(userId);
@@ -77,14 +70,12 @@ public class AuthService: IAuthService
         await _userRepository.SaveChangesAsync();
         return true;
     }
-    
-    public async Task<TokenResponseDTO?> RefreshTokensAsync(RefreshTokenRequestDTO request)
+
+    public async Task<AuthResult?> RefreshTokensAsync(int userId, string refreshToken)
     {
-        var user = await _refreshTokenService.ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
-        if (user is null)
-            return null;
+        var user = await _refreshTokenService.ValidateRefreshTokenAsync(userId, refreshToken);
+        if (user is null) return null;
 
         return await CreateTokenResponse(user);
     }
 }
-

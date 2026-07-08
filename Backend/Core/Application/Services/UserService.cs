@@ -1,9 +1,9 @@
 using TaskManager_API.Core.Application.Interfaces;
-using TaskManager_API.Contracts.DTOs;
+using TaskManager_API.Core.Domain;
 
 namespace Core.Application.Services;
 
-public class UserService: IUserService
+public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
 
@@ -11,46 +11,24 @@ public class UserService: IUserService
     {
         _userRepository = userRepository;
     }
-    
-    public async Task<List<UserResponseDTO>> GetAllAsync()
-    {
-        var users = await _userRepository.GetAllAsync();
-        
-        var usersDto =  users.Select(user => new UserResponseDTO
-        {
-            Id = user.Id,
-            Username = user.Username,
-            Role = user.Role
-        }).ToList();
 
-        return usersDto;
+    public async Task<List<User>> GetAllAsync()
+    {
+        return await _userRepository.GetAllAsync();
     }
-    
-    public async Task<UserResponseDTO?> GetByIdAsync(int id)
+
+    public async Task<User?> GetByIdAsync(int id)
     {
         if (id == 0) return null;
-        
-        var user = await _userRepository.GetByIdAsync(id);
-        if (user == null) return null;
-
-        var dto = new UserResponseDTO
-        {
-            Id = user.Id,
-            Username = user.Username,
-            Role = user.Role
-        };
-        
-        return dto;
+        return await _userRepository.GetByIdAsync(id);
     }
-    
+
     public async Task<bool> DeleteUserAsync(int id)
     {
         bool isDel = await _userRepository.DeleteByIdAsync(id);
-        
-        if(isDel == false) return false;
-        
-        await _userRepository.SaveChangesAsync();
+        if (!isDel) return false;
 
+        await _userRepository.SaveChangesAsync();
         return true;
     }
 }
