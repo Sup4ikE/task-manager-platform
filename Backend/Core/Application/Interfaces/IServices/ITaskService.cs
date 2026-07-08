@@ -1,12 +1,12 @@
-using TaskManager_API.Contracts.DTOs;
+using TaskManager_API.Core.Domain;
 
 namespace TaskManager_API.Core.Application.Interfaces;
 
 public interface ITaskService
 {
-    Task<List<TaskDTO>> GetAllAsync(int userId);
-    Task<TaskDTO?> GetByIdAsync(int userId, int taskId);
-    Task<TaskDTO> AddAsync(TaskDTO taskItem, int userId);
-    Task<bool> UpdateAsync(int userId, int taskId, TaskDTO taskItem);
+    Task<List<TaskItem>> GetAllAsync(int userId);
+    Task<TaskItem?> GetByIdAsync(int userId, int taskId);
+    Task<TaskItem> AddAsync(TaskItem taskItem, int userId);
+    Task<bool> UpdateAsync(int userId, int taskId, TaskItem taskItem);
     Task<bool> DeleteByIdAsync(int userId, int taskId);
 }

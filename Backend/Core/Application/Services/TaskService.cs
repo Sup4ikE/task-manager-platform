@@ -1,5 +1,4 @@
 using TaskManager_API.Core.Application.Interfaces;
-using TaskManager_API.Contracts.DTOs;
 using TaskManager_API.Core.Domain;
 
 namespace Core.Application.Services;
@@ -13,27 +12,16 @@ public class TaskService: ITaskService
         _taskRepository = taskRepository;
     }
 
-    public async Task<List<TaskDTO>> GetAllAsync(int userId)
+    public async Task<List<TaskItem>> GetAllAsync(int userId)
     {
-        if (userId <= 0) return new List<TaskDTO>();
+        if (userId <= 0) return new List<TaskItem>();
         
         var list = await _taskRepository.GetAllAsync(userId);
         
-        var ResultTasks = list
-        .Select(t => new TaskDTO
-        {
-            Id = t.Id,
-            Title = t.Title,
-            Description = t.Description,
-            IsCompleted = t.IsCompleted,
-            Created = t.Created
-        })
-        .ToList();
-        
-        return ResultTasks;
+        return list;
     }
 
-    public async Task<TaskDTO?> GetByIdAsync(int userId, int taskId)
+    public async Task<TaskItem?> GetByIdAsync(int userId, int taskId)
     {
         if (userId <= 0 || taskId <= 0) return null;
 
@@ -41,47 +29,23 @@ public class TaskService: ITaskService
 
         if (taskItem == null) return null;
         
-        var taskDto = new TaskDTO()
-        {
-            Id = taskItem.Id,
-            Title = taskItem.Title,
-            Description = taskItem.Description,
-            IsCompleted = taskItem.IsCompleted,
-            Created = taskItem.Created
-        };
-        
-        return taskDto;
+        return taskItem;
     }
 
-    public async Task<TaskDTO> AddAsync(TaskDTO taskItem, int userId)
+    public async Task<TaskItem> AddAsync(TaskItem taskItem, int userId)
     {
         if (userId <= 0) throw new ArgumentException("Invalid user id", nameof(userId));
-        
-        var newTask = new TaskItem
-        {
-            Title = taskItem.Title,
-            Description = taskItem.Description,
-            Created = DateTime.UtcNow,
-            IsCompleted = taskItem.IsCompleted,
-            UserId = userId
-        };
-        
-        await _taskRepository.AddAsync(newTask);
+
+        taskItem.UserId = userId;
+        taskItem.Created = DateTime.UtcNow;
+
+        await _taskRepository.AddAsync(taskItem);
         await _taskRepository.SaveChangesAsync();
 
-        var newTaskDto = new TaskDTO()
-        {
-            Id = newTask.Id,
-            Title = newTask.Title,
-            Description = newTask.Description,
-            IsCompleted = newTask.IsCompleted,
-            Created = newTask.Created
-        };
-        
-        return newTaskDto;
+        return taskItem;
     }
 
-    public async Task<bool> UpdateAsync(int userId, int taskId, TaskDTO taskItem)
+    public async Task<bool> UpdateAsync(int userId, int taskId, TaskItem taskItem)
     {
         if (userId <= 0 || taskId <= 0)
             return false;

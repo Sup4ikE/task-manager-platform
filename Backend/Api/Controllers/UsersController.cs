@@ -8,7 +8,7 @@ namespace TaskManager_API.Controllers;
 [Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController: ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
 
@@ -22,7 +22,14 @@ public class UsersController: ControllerBase
     {
         var users = await _userService.GetAllAsync();
 
-        return Ok(users);
+        var result = users.Select(u => new UserResponseDTO
+        {
+            Id = u.Id,
+            Username = u.Username,
+            Role = u.Role
+        }).ToList();
+
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
@@ -30,17 +37,21 @@ public class UsersController: ControllerBase
     {
         var user = await _userService.GetByIdAsync(id);
         if (user == null) return NotFound();
-        
-        return Ok(user);
+
+        return Ok(new UserResponseDTO
+        {
+            Id = user.Id,
+            Username = user.Username,
+            Role = user.Role
+        });
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult<bool>> DeleteByIdAsync(int id)
     {
         var result = await _userService.DeleteUserAsync(id);
-        
-        if (result == false) return NotFound();
-        
+        if (!result) return NotFound();
+
         return Ok(result);
     }
 }
