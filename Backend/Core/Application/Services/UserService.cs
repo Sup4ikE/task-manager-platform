@@ -5,30 +5,30 @@ namespace Core.Application.Services;
 
 public class UserService : IUserService
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IUnitOfWork unitOfWork)
     {
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<List<User>> GetAllAsync()
     {
-        return await _userRepository.GetAllAsync();
+        return await _unitOfWork.Users.GetAllAsync();
     }
 
     public async Task<User?> GetByIdAsync(int id)
     {
         if (id == 0) return null;
-        return await _userRepository.GetByIdAsync(id);
+        return await _unitOfWork.Users.GetByIdAsync(id);
     }
 
     public async Task<bool> DeleteUserAsync(int id)
     {
-        bool isDel = await _userRepository.DeleteByIdAsync(id);
+        bool isDel = await _unitOfWork.Users.DeleteByIdAsync(id);
         if (!isDel) return false;
 
-        await _userRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
         return true;
     }
 }

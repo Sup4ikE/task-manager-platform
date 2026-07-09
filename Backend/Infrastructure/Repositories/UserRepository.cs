@@ -53,9 +53,4 @@ public class UserRepository: IUserRepository
         
         return true;
     }
-    
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
-    }
 }

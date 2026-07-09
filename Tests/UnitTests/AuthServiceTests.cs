@@ -12,7 +12,7 @@ public class AuthServiceTests
     public async Task RegisterAsync_WhenUsernameIsNew_CreatesUserAndSaves()
     {
         // Arrange
-        var userRepo = new Mock<IUserRepository>(MockBehavior.Strict);
+        var unitofwork = new Mock<IUnitOfWork>(MockBehavior.Strict);
         var passwordHasher = new Mock<IPasswordHasher<User>>(MockBehavior.Strict);
         var jwtTokenGen = new Mock<IJwtTokenGenerator>(MockBehavior.Loose);
         var refreshTokenService = new Mock<IRefreshTokenService>(MockBehavior.Loose);
@@ -20,27 +20,27 @@ public class AuthServiceTests
         const string username = "new_user";
         const string password = "Pass123!";
 
-        userRepo
-            .Setup(r => r.GetByUsernameAsync(username))
+        unitofwork
+            .Setup(r => r.Users.GetByUsernameAsync(username))
             .ReturnsAsync((User?)null);
 
         passwordHasher
             .Setup(h => h.HashPassword(It.IsAny<User>(), password))
             .Returns("hashed_password");
 
-        userRepo
-            .Setup(r => r.AddAsync(It.Is<User>(u =>
+        unitofwork
+            .Setup(r => r.Users.AddAsync(It.Is<User>(u =>
                 u.Username == username &&
                 u.Role == "User" &&
                 u.PasswordHash == "hashed_password")))
             .ReturnsAsync((User u) => u);
 
-        userRepo
+        unitofwork
             .Setup(r => r.SaveChangesAsync())
-            .Returns(Task.CompletedTask);
+            .ReturnsAsync(1);
 
         var sut = new AuthService(
-            userRepo.Object,
+            unitofwork.Object,
             passwordHasher.Object,
             jwtTokenGen.Object,
             refreshTokenService.Object);
@@ -54,12 +54,12 @@ public class AuthServiceTests
         Assert.Equal("User", createdUser.Role);
         Assert.False(string.IsNullOrWhiteSpace(createdUser.PasswordHash));
 
-        userRepo.Verify(r => r.GetByUsernameAsync(username), Times.Once);
+        unitofwork.Verify(r => r.Users.GetByUsernameAsync(username), Times.Once);
         passwordHasher.Verify(h => h.HashPassword(It.IsAny<User>(), password), Times.Once);
-        userRepo.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Once);
-        userRepo.Verify(r => r.SaveChangesAsync(), Times.Once);
+        unitofwork.Verify(r => r.Users.AddAsync(It.IsAny<User>()), Times.Once);
+        unitofwork.Verify(r => r.SaveChangesAsync(), Times.Once);
 
-        userRepo.VerifyNoOtherCalls();
+        unitofwork.VerifyNoOtherCalls();
         passwordHasher.VerifyNoOtherCalls();
     }
 
@@ -67,7 +67,7 @@ public class AuthServiceTests
     public async Task UsernameAlreadyUsed()
     {
         // Arrange
-        var userRepo = new Mock<IUserRepository>(MockBehavior.Strict);
+        var unitofwork = new Mock<IUnitOfWork>(MockBehavior.Strict);
         var passwordHasher = new Mock<IPasswordHasher<User>>(MockBehavior.Strict);
         var jwtTokenGen = new Mock<IJwtTokenGenerator>(MockBehavior.Loose);
         var refreshTokenService = new Mock<IRefreshTokenService>(MockBehavior.Loose);
@@ -77,12 +77,12 @@ public class AuthServiceTests
 
         var existingUser = new User { Username = username };
 
-        userRepo
-            .Setup(r => r.GetByUsernameAsync(username))
+        unitofwork
+            .Setup(r => r.Users.GetByUsernameAsync(username))
             .ReturnsAsync(existingUser);
 
         var sut = new AuthService(
-            userRepo.Object,
+            unitofwork.Object,
             passwordHasher.Object,
             jwtTokenGen.Object,
             refreshTokenService.Object);
@@ -93,12 +93,12 @@ public class AuthServiceTests
         // Assert
         Assert.Null(result);
 
-        userRepo.Verify(r => r.GetByUsernameAsync(username), Times.Once);
-        userRepo.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Never);
-        userRepo.Verify(r => r.SaveChangesAsync(), Times.Never);
+        unitofwork.Verify(r => r.Users.GetByUsernameAsync(username), Times.Once);
+        unitofwork.Verify(r => r.Users.AddAsync(It.IsAny<User>()), Times.Never);
+        unitofwork.Verify(r => r.SaveChangesAsync(), Times.Never);
         passwordHasher.Verify(h => h.HashPassword(It.IsAny<User>(), It.IsAny<string>()), Times.Never);
 
-        userRepo.VerifyNoOtherCalls();
+        unitofwork.VerifyNoOtherCalls();
         passwordHasher.VerifyNoOtherCalls();
     }
 
@@ -106,7 +106,7 @@ public class AuthServiceTests
     public async Task LoginSucceed()
     {
         // Arrange
-        var userRepo = new Mock<IUserRepository>(MockBehavior.Strict);
+        var unitofwork = new Mock<IUnitOfWork>(MockBehavior.Strict);
         var passwordHasher = new Mock<IPasswordHasher<User>>(MockBehavior.Strict);
         var jwtTokenGen = new Mock<IJwtTokenGenerator>(MockBehavior.Loose);
         var refreshTokenService = new Mock<IRefreshTokenService>(MockBehavior.Loose);
@@ -116,8 +116,8 @@ public class AuthServiceTests
 
         var user = new User { Id = 1, Username = username, PasswordHash = "hash", Role = "User" };
 
-        userRepo
-            .Setup(r => r.GetByUsernameAsync(username))
+        unitofwork
+            .Setup(r => r.Users.GetByUsernameAsync(username))
             .ReturnsAsync(user);
 
         passwordHasher
@@ -133,7 +133,7 @@ public class AuthServiceTests
             .ReturnsAsync("refresh_token");
 
         var sut = new AuthService(
-            userRepo.Object,
+            unitofwork.Object,
             passwordHasher.Object,
             jwtTokenGen.Object,
             refreshTokenService.Object);
@@ -146,12 +146,12 @@ public class AuthServiceTests
         Assert.Equal("jwt_token", result!.AccessToken);
         Assert.Equal("refresh_token", result.RefreshToken);
 
-        userRepo.Verify(r => r.GetByUsernameAsync(username), Times.Once);
+        unitofwork.Verify(r => r.Users.GetByUsernameAsync(username), Times.Once);
         passwordHasher.Verify(h => h.VerifyHashedPassword(user, user.PasswordHash, password), Times.Once);
         jwtTokenGen.Verify(g => g.CreateToken(user), Times.Once);
         refreshTokenService.Verify(r => r.GenerateAndSaveRefreshTokenAsync(user), Times.Once);
 
-        userRepo.VerifyNoOtherCalls();
+        unitofwork.VerifyNoOtherCalls();
         passwordHasher.VerifyNoOtherCalls();
         jwtTokenGen.VerifyNoOtherCalls();
         refreshTokenService.VerifyNoOtherCalls();
@@ -161,7 +161,7 @@ public class AuthServiceTests
     public async Task LoginAsyncIncorrectPassword()
     {
         // Arrange
-        var userRepo = new Mock<IUserRepository>(MockBehavior.Strict);
+        var unitofwork = new Mock<IUnitOfWork>(MockBehavior.Strict);
         var passwordHasher = new Mock<IPasswordHasher<User>>(MockBehavior.Strict);
         var jwtTokenGen = new Mock<IJwtTokenGenerator>(MockBehavior.Loose);
         var refreshTokenService = new Mock<IRefreshTokenService>(MockBehavior.Loose);
@@ -171,8 +171,8 @@ public class AuthServiceTests
 
         var user = new User { Id = 1, Username = username, PasswordHash = "hash", Role = "User" };
 
-        userRepo
-            .Setup(r => r.GetByUsernameAsync(username))
+        unitofwork
+            .Setup(r => r.Users.GetByUsernameAsync(username))
             .ReturnsAsync(user);
 
         passwordHasher
@@ -180,7 +180,7 @@ public class AuthServiceTests
             .Returns(PasswordVerificationResult.Failed);
 
         var sut = new AuthService(
-            userRepo.Object,
+            unitofwork.Object,
             passwordHasher.Object,
             jwtTokenGen.Object,
             refreshTokenService.Object);
@@ -191,13 +191,13 @@ public class AuthServiceTests
         // Assert
         Assert.Null(result);
 
-        userRepo.Verify(r => r.GetByUsernameAsync(username), Times.Once);
+        unitofwork.Verify(r => r.Users.GetByUsernameAsync(username), Times.Once);
         passwordHasher.Verify(h => h.VerifyHashedPassword(user, user.PasswordHash, password), Times.Once);
 
         jwtTokenGen.Verify(g => g.CreateToken(It.IsAny<User>()), Times.Never);
         refreshTokenService.Verify(r => r.GenerateAndSaveRefreshTokenAsync(It.IsAny<User>()), Times.Never);
 
-        userRepo.VerifyNoOtherCalls();
+        unitofwork.VerifyNoOtherCalls();
         passwordHasher.VerifyNoOtherCalls();
     }
 }

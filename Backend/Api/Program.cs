@@ -31,6 +31,7 @@ public class Program
         builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         // DB
         builder.Services.AddDbContext<TaskManagerContext>(options =>

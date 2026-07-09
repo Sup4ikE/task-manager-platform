@@ -5,18 +5,18 @@ namespace Core.Application.Services;
 
 public class TaskService: ITaskService
 {
-    private readonly ITaskRepository _taskRepository;
+    private readonly IUnitOfWork _unitOfWork;
     
-    public TaskService(ITaskRepository taskRepository)
+    public TaskService(IUnitOfWork unitOfWork)
     {
-        _taskRepository = taskRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<List<TaskItem>> GetAllAsync(int userId)
     {
         if (userId <= 0) return new List<TaskItem>();
         
-        var list = await _taskRepository.GetAllAsync(userId);
+        var list = await _unitOfWork.Tasks.GetAllAsync(userId);
         
         return list;
     }
@@ -25,7 +25,7 @@ public class TaskService: ITaskService
     {
         if (userId <= 0 || taskId <= 0) return null;
 
-        var taskItem = await _taskRepository.GetByIdAsync(userId, taskId);
+        var taskItem = await _unitOfWork.Tasks.GetByIdAsync(userId, taskId);
 
         if (taskItem == null) return null;
         
@@ -39,8 +39,8 @@ public class TaskService: ITaskService
         taskItem.UserId = userId;
         taskItem.Created = DateTime.UtcNow;
 
-        await _taskRepository.AddAsync(taskItem);
-        await _taskRepository.SaveChangesAsync();
+        await _unitOfWork.Tasks.AddAsync(taskItem);
+        await _unitOfWork.SaveChangesAsync();
 
         return taskItem;
     }
@@ -50,7 +50,7 @@ public class TaskService: ITaskService
         if (userId <= 0 || taskId <= 0)
             return false;
 
-        var task = await _taskRepository.GetByIdAsync(userId, taskId);
+        var task = await _unitOfWork.Tasks.GetByIdAsync(userId, taskId);
         if (task == null)
             return false;
 
@@ -58,17 +58,17 @@ public class TaskService: ITaskService
         task.Description = taskItem.Description;
         task.IsCompleted = taskItem.IsCompleted;
 
-        await _taskRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> DeleteByIdAsync(int userId, int taskId)
     {
-        var isDel = await _taskRepository.DeleteByIdAsync(userId, taskId);
+        var isDel = await _unitOfWork.Tasks.DeleteByIdAsync(userId, taskId);
         
         if (isDel == false) return false;
         
-        await _taskRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
         
         return true;
     }

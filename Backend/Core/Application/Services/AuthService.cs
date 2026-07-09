@@ -7,14 +7,14 @@ namespace TaskManager_API.Core.Application.Services;
 
 public class AuthService : IAuthService
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IRefreshTokenService _refreshTokenService;
 
-    public AuthService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher, IJwtTokenGenerator jwtTokenGenerator, IRefreshTokenService refreshTokenService)
+    public AuthService(IUnitOfWork unitOfWork, IPasswordHasher<User> passwordHasher, IJwtTokenGenerator jwtTokenGenerator, IRefreshTokenService refreshTokenService)
     {
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
         _passwordHasher = passwordHasher;
         _jwtTokenGenerator = jwtTokenGenerator;
         _refreshTokenService = refreshTokenService;
@@ -31,7 +31,7 @@ public class AuthService : IAuthService
 
     public async Task<User?> RegisterAsync(string username, string password)
     {
-        var existing = await _userRepository.GetByUsernameAsync(username);
+        var existing = await _unitOfWork.Users.GetByUsernameAsync(username);
         if (existing != null) return null;
 
         var user = new User
@@ -42,15 +42,15 @@ public class AuthService : IAuthService
 
         user.PasswordHash = _passwordHasher.HashPassword(user, password);
 
-        await _userRepository.AddAsync(user);
-        await _userRepository.SaveChangesAsync();
+        await _unitOfWork.Users.AddAsync(user);
+        await _unitOfWork.SaveChangesAsync();
 
         return user;
     }
 
     public async Task<AuthResult?> LoginAsync(string username, string password)
     {
-        var user = await _userRepository.GetByUsernameAsync(username);
+        var user = await _unitOfWork.Users.GetByUsernameAsync(username);
         if (user == null) return null;
 
         var verify = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
@@ -61,13 +61,13 @@ public class AuthService : IAuthService
 
     public async Task<bool> LogoutAsync(int userId)
     {
-        var user = await _userRepository.GetByIdAsync(userId);
+        var user = await _unitOfWork.Users.GetByIdAsync(userId);
         if (user == null) return false;
 
         user.RefreshToken = null;
         user.RefreshTokenExpiryTime = null;
 
-        await _userRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
         return true;
     }
 

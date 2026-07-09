@@ -6,11 +6,11 @@ namespace Infrastructure.Auth;
 
 public class RefreshTokenService: IRefreshTokenService
 {
-    private readonly IUserRepository _userRepository;
+    private IUnitOfWork _unitOfWork;
     
-    public RefreshTokenService(IUserRepository userRepository)
+    public RefreshTokenService(IUnitOfWork unitOfWork)
     {
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
     
     private string GenerateRefreshToken()
@@ -27,13 +27,13 @@ public class RefreshTokenService: IRefreshTokenService
         var refreshToken = GenerateRefreshToken();
         user.RefreshToken = refreshToken;
         user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
-        await _userRepository.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
         return refreshToken;
     }
     
     public async Task<User?> ValidateRefreshTokenAsync(int userId, string refreshToken)
     {
-        var user = await _userRepository.GetByIdAsync(userId);
+        var user = await _unitOfWork.Users.GetByIdAsync(userId);
         if (user is null) return null;
 
         if (string.IsNullOrWhiteSpace(user.RefreshToken)) return null;
