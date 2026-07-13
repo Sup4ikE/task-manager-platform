@@ -1,3 +1,4 @@
+using Core.Application.Specifications;
 using TaskManager_API.Core.Application.Interfaces;
 using TaskManager_API.Core.Domain;
 
@@ -16,9 +17,9 @@ public class TaskService: ITaskService
     {
         if (userId <= 0) return new List<TaskItem>();
         
-        var list = await _unitOfWork.Tasks.GetAllAsync(userId);
+        var tasks = await _unitOfWork.Tasks.ListAsync(new AllUserTasksSpec(userId));
         
-        return list;
+        return tasks;
     }
 
     public async Task<TaskItem?> GetByIdAsync(int userId, int taskId)

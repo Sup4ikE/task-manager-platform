@@ -1,3 +1,5 @@
+using Core.Application.Specifications;
+using Infrastructure.Specifications;
 using Microsoft.EntityFrameworkCore;
 using TaskManager_API.Core.Application.Interfaces;
 using TaskManager_API.Core.Domain;
@@ -21,6 +23,11 @@ public class TaskRepository : ITaskRepository
             .ToListAsync();
 
         return tasks;
+    }
+    
+    public async Task<List<TaskItem>> ListAsync(Specification<TaskItem> spec)
+    {
+        return await SpecificationEvaluator<TaskItem>.GetQuery(_context.Tasks.AsQueryable(), spec).ToListAsync();
     }
 
     public async Task<TaskItem?> GetByIdAsync(int userId, int taskId)
