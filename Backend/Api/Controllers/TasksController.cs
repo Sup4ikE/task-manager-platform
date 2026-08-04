@@ -1,9 +1,10 @@
 using System.Security.Claims;
+using Core.Application.Tasks.Commands;
+using Core.Application.Tasks.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager_API.Contracts.DTOs;
-using TaskManager_API.Core.Application.Interfaces;
-using TaskManager_API.Core.Domain;
 
 namespace TaskManager_API.Controllers;
 
@@ -12,11 +13,11 @@ namespace TaskManager_API.Controllers;
 [Route("api/[controller]")]
 public class TasksController: ControllerBase
 {
-    private readonly ITaskService _taskService;
+    private readonly IMediator _mediator;
 
-    public TasksController(ITaskService taskService)
+    public TasksController(IMediator mediator)
     {
-        _taskService = taskService;
+        _mediator = mediator;
     }
 
     private bool TryGetUserId(out int userId)
@@ -33,18 +34,18 @@ public class TasksController: ControllerBase
     public async Task<ActionResult<List<TaskDTO>>> GetAllAsync()
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();
-        
-        var tasks = await _taskService.GetAllAsync(userId);
-        
-        var dtos = tasks.Select(x => new TaskDTO() 
-        {  
+
+        var tasks = await _mediator.Send(new GetAllTasksQuery(userId));
+
+        var dtos = tasks.Select(x => new TaskDTO()
+        {
             Id = x.Id,
             Title = x.Title,
             Description = x.Description,
             IsCompleted = x.IsCompleted,
-            Created = x.Created 
+            Created = x.Created
         }).ToList();
-        
+
         return Ok(dtos);
     }
 
@@ -53,7 +54,7 @@ public class TasksController: ControllerBase
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();
         
-        var task = await _taskService.GetByIdAsync(userId, id);
+        var task = await _mediator.Send(new GetByIdTaskQuery(userId, id));
 
         if (task == null) return NotFound();
         
@@ -74,26 +75,19 @@ public class TasksController: ControllerBase
     public async Task<ActionResult<TaskDTO>> AddAsync(TaskDTO taskItem)
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();;
-
-        var task = new TaskItem()
-        {
-            Title = taskItem.Title,
-            Description = taskItem.Description,
-            IsCompleted = taskItem.IsCompleted
-        };
         
-        var newTask = await _taskService.AddAsync(task, userId);
-
-        var newTaskDto = new TaskDTO()
+        var newTask = await _mediator.Send(new CreateTaskCommand(taskItem.Title, taskItem.Description, userId));
+        
+        var taskDto = new TaskDTO()
         {
-            Id = newTask.Id,
+            Id = newTask.Id,   
             Title = newTask.Title,
             Description = newTask.Description,
             IsCompleted = newTask.IsCompleted,
             Created = newTask.Created
         };
         
-        return CreatedAtAction(nameof(GetByIdAsync), new {id = newTaskDto.Id}, newTaskDto);
+        return CreatedAtAction(nameof(GetByIdAsync), new {id = taskDto.Id}, taskDto);
     }
 
     [HttpPut("{id}")]
@@ -101,15 +95,7 @@ public class TasksController: ControllerBase
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();
 
-        var task = new TaskItem()
-        {
-            Id = id,
-            Title = taskItem.Title,
-            Description = taskItem.Description,
-            IsCompleted = taskItem.IsCompleted
-        };
-        
-        var isUpdated = await _taskService.UpdateAsync(userId, id, task);
+        var isUpdated = await _mediator.Send(new UpdateTaskCommand(userId, id, taskItem.Title, taskItem.Description, taskItem.IsCompleted));
 
         return isUpdated ? NoContent() : NotFound();
     }
@@ -118,9 +104,9 @@ public class TasksController: ControllerBase
     public async Task<ActionResult<bool>> DeleteByIdAsync(int id)
     {
         if (!TryGetUserId(out var userId)) return Unauthorized();
-        
-        var isDeleted = await _taskService.DeleteByIdAsync(userId, id);
-        
+
+        var isDeleted = await _mediator.Send(new DeleteTaskCommand(userId, id));
+
         return isDeleted ? NoContent() : NotFound();
     }
 }

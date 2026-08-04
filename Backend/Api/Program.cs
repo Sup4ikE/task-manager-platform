@@ -32,6 +32,8 @@ public class Program
         builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddMediatR(cfg => 
+            cfg.RegisterServicesFromAssembly(typeof(TaskService).Assembly));
         
         // DB
         builder.Services.AddDbContext<TaskManagerContext>(options =>
