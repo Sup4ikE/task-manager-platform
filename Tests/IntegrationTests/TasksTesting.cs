@@ -9,6 +9,7 @@ using TaskManager_API.Data;
 using Microsoft.AspNetCore.Authentication; 
 using TaskManager_API.Contracts.DTOs;
 using TaskManager_API.Core.Domain;
+using Microsoft.EntityFrameworkCore.InMemory;
 
 public class TasksTesting : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -23,16 +24,23 @@ public class TasksTesting : IClassFixture<WebApplicationFactory<Program>>
                 var descriptor = services.SingleOrDefault(d =>
                     d.ServiceType == typeof(DbContextOptions<TaskManagerContext>));
                 if (descriptor != null) services.Remove(descriptor);
+                
+                var efServiceProvider = new ServiceCollection()
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
 
                 services.AddDbContext<TaskManagerContext>(opt =>
-                    opt.UseInMemoryDatabase("TestDb"));
+                {
+                    opt.UseInMemoryDatabase("TestDb");
+                    opt.UseInternalServiceProvider(efServiceProvider);
+                });
 
                 services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = "Test";
-                    options.DefaultChallengeScheme = "Test";
-                })
-                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
+                    {
+                        options.DefaultAuthenticateScheme = "Test";
+                        options.DefaultChallengeScheme = "Test";
+                    })
+                    .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
             });
         });
     }

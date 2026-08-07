@@ -13,14 +13,14 @@
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::TasksTesting&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=abab5ba1_002D22d8_002D42ce_002D9b29_002D502c1c6fe2a9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetTasks_ReturnsOk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=abab5ba1_002D22d8_002D42ce_002D9b29_002D502c1c6fe2a9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetTasks_ReturnsOk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::UsersTesting&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::TasksTesting&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8e3c963_002D6569_002D4dac_002Dada8_002D3edcbb45d68e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8e3c963_002D6569_002D4dac_002Dada8_002D3edcbb45d68e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuthServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::Tests.Unit.AuthServiceTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::B2211385-21FA-43DC-AFEB-5564EB213E1F::net9.0::TasksTesting&lt;/TestId&gt;

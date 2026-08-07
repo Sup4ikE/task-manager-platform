@@ -20,12 +20,16 @@ public class UsersTesting: IClassFixture<WebApplicationFactory<Program>>
         {
             builder.ConfigureServices(services =>
             {
-                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TaskManagerContext>)); 
+                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TaskManagerContext>));
                 if (descriptor != null) services.Remove(descriptor);
-                
+
+                var efServiceProvider = new ServiceCollection()
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
+
                 services.AddDbContext<TaskManagerContext>(options =>
                 {
-                    options.UseInMemoryDatabase("TestDb1").UseInternalServiceProvider( new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider());
+                    options.UseInMemoryDatabase("TestDb1").UseInternalServiceProvider(efServiceProvider);
                 });
                 
                 services.AddAuthentication("Test").AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { }); 
